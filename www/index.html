@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- TODO: license -->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+    </head>
+    <body>
+		<h1>Myo Cordova Plugin test application</h1>
+		<div id="deviceready" class="blink">
+			<p class="event listening">Connecting to Device</p>
+			<p class="event received">Device is Ready</p>
+			<p id="myoConnecting" class="event received hidden">Connecting to Myo...</p>
+			<p id="myoConnected" class="event received hidden">Myo connected: <b id="myoName"></b></p>
+		</div>
+		<br><br>
+		<button id="btnAttachLast">Attach to the last Myo used</button>
+		<br><br>
+		<button id="btnAttachClosest">Attach to an adjacent Myo</button>
+		<br><br>
+		<button id="btnScan">Launch the scan dialog</button>
+		<br><br>
+		<button id="btnVibrateMyo">Vibrate the connected Myo</button>
+		<br><br>
+		<button id="btnShowMyo">See info of the current connected Myo</button>
+		<br><br>
+		<button id="btnListDevices">See connected Myos</button>
+		<br><br>
+		<button id="btnDetach">Detach from current Myo</button>
+		<br><br>
+		<button id="btnShutdown">Shutdown Myo API</button>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>

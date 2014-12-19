@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.tribalyte.app.myoplugintest" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>MyoPluginTestCordova</name>
+    <description>
+        A sample application to demonstrate the usage of the cordova-plugin-myo
+    </description>
+    <author email="info@tribalyte.com" href="http://tribalyte.com">
+        Tribalyte Technologies S.L.
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+</widget>
