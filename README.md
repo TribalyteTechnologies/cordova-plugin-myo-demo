@@ -1,10 +1,25 @@
-cordova-plugin-myo-demo
-=======================
-
+# cordova-plugin-myo-demo
 Sample application to demonstrate the usage of the <a href="https://github.com/TribalyteTechnologies/cordova-plugin-myo">cordova-plugin-myo project</a>.
 
-License
-=======================
+## Installation
+0. (Prerequisite) If you haven't already, download and install the [Android SDK Build Tools](https://developer.android.com/tools/revisions/build-tools.html) and the [Cordova CLI](http://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface_installing_the_cordova_cli)
+1. Clone this repository in your computer:<br>
+```git clone https://github.com/TribalyteTechnologies/cordova-plugin-myo-demo.git```
+2. Go to the project root folder:<br>
+```cd cordova-plugin-myo-demo```
+3. Add the cordova-plugin-myo:<br>
+```cordova plugin add https://github.com/TribalyteTechnologies/cordova-plugin-myo.git```
+4. Add the Android platform:<br>
+```cordova platform add android```
+5. Connect a compatible Android device and launch the application:<br>
+```cordova run android```
+
+## Features
+* Connect the Myo device using the attach buttons or the scan dialog available in the GUI
+* Check the information of the connected Myo
+* Make the Myo vibrate
+
+# License
 The MIT License (http://www.opensource.org/licenses/mit-license.html)
 
 Copyright (c) 2014 Tribalyte Technologies S.L. (http://www.tribalyte.com/)
