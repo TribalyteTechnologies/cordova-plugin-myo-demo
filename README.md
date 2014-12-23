@@ -13,6 +13,7 @@ Sample application to demonstrate the usage of the <a href="https://github.com/T
 ```cordova platform add android```
 5. Connect a compatible Android device and launch the application:<br>
 ```cordova run android```
+6. Make sure the Bluetooth interface of the mobile device is on.
 
 ## Features
 * Connect the Myo device using the attach buttons or the scan dialog available in the GUI
