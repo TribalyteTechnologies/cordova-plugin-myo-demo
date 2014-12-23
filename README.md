@@ -20,6 +20,8 @@ Sample application to demonstrate the usage of the <a href="https://github.com/T
 * Connect the Myo device using the attach buttons or the scan dialog available in the GUI
 * Check the information of the connected Myo
 * Make the Myo vibrate
+<br><br>
+![Application screenshot](screenshot.png?raw=true "Application screenshot")
 
 # License
 The MIT License (http://www.opensource.org/licenses/mit-license.html)
