@@ -14,7 +14,7 @@ Sample application to demonstrate the usage of the <a href="https://github.com/T
 5. Connect a compatible Android device and launch the application:<br>
 ```cordova run android```
 6. Make sure the Bluetooth interface of the mobile device is on.
-7. Make sure the Myo device is on (put in on or shake it until the light starts blinking).
+7. Make sure the Myo device is on (put it on or shake it until the light starts blinking).
 
 ## Features
 * Connect the Myo device using the attach buttons or the scan dialog available in the GUI
