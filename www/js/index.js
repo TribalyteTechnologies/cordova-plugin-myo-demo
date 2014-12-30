@@ -78,7 +78,32 @@ var initMyoDemoApp = function(){
 			});*/
 			apiInited = true;
 		}, function(err){
-			console.log("Error initializing Myo Hub: " + err);
+			window.alert("Error initializing the Myo Hub: " + err);
+		});
+	}
+	function checkBluetooth(btOnCallback){
+		MyoApi.isBluetoothEnabled(function(isBtOn){
+			console.log("The bluetooth adater is " + (isBtOn ? "ON" : "OFF") );
+			if(isBtOn){
+				if(btOnCallback){
+					btOnCallback();
+				}
+			}else{
+				MyoApi.openBluetoothConfig(function(didEnableBt){
+					if(didEnableBt){
+						console.log("Bluetooth enabled by the user");
+						if(btOnCallback){
+							btOnCallback();
+						}
+					}else{
+						window.alert("You need to enable the Bluetooth adapter in order to use Myo");
+					}
+				}, function(err){
+					window.alert("Error opening Bluetooth configuration: " + err);
+				});
+			}
+		}, function(err){
+			window.alert("Error checking Bluetooth adapter state: " + err);
 		});
 	}
 	function logMyoEvent(arg){
@@ -156,16 +181,18 @@ var initMyoDemoApp = function(){
 		if(!apiInited){
 			initApi();
 		}
-		var lastMac = localStorage["lastUsedMyoMac"];
-		if(lastMac){
-			MyoApi.attachByMacAddress(lastMac, function(res){
-				console.log("Attach command sent to MAC " + lastMac + ": " + res);
-			}, function(err){
-				console.log("ERROR sending attach to MAC command: " + err);
-			});
-		}else{
-			window.alert("No previous Myo known");
-		}
+		checkBluetooth(function(){
+			var lastMac = localStorage["lastUsedMyoMac"];
+			if(lastMac){
+				MyoApi.attachByMacAddress(lastMac, function(res){
+					console.log("Attach command sent to MAC " + lastMac + ": " + res);
+				}, function(err){
+					console.log("ERROR sending attach to MAC command: " + err);
+				});
+			}else{
+				window.alert("No previous Myo known");
+			}
+		});
 	};
 
 	docElem("btnAttachClosest").onclick = function(){
@@ -174,10 +201,12 @@ var initMyoDemoApp = function(){
 		if(!apiInited){
 			initApi();
 		}
-		MyoApi.attachToAdjacentMyo(function(res){
+		checkBluetooth(function(){
+			MyoApi.attachToAdjacentMyo(function(res){
 			console.log("Attach command sent: " + res);
-		}, function(err){
-			console.log("ERROR sending attach command: " + err);
+			}, function(err){
+				console.log("ERROR sending attach command: " + err);
+			});
 		});
 	};
 
