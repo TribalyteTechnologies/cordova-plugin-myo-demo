@@ -11,14 +11,20 @@
         <title>Hello World</title>
     </head>
     <body>
-		<h1>Myo Cordova Plugin test application</h1>
+		<h1>Myo Cordova Plugin demo application</h1>
 		<div id="deviceready" class="blink">
 			<p class="event listening">Connecting to Device</p>
 			<p class="event received">Device is Ready</p>
 			<p id="myoConnecting" class="event received hidden">Connecting to Myo...</p>
 			<p id="myoConnected" class="event received hidden">Myo connected: <b id="myoName"></b></p>
 		</div>
-		<br><br>
+		<br>
+		<div id="myoSensorData" class="margin-left hidden">
+			orientationData &gt; <span id="sensOrientationData"></span><br>
+			accelerometerData &gt; <span id="sensAccelerometerData"></span><br>
+			gyroscopeData &gt; <span id="sensGyroscopeData"></span>
+		</div>
+		<br>
 		<button id="btnAttachLast">Attach to the last Myo used</button>
 		<br><br>
 		<button id="btnAttachClosest">Attach to an adjacent Myo</button>
@@ -27,13 +33,15 @@
 		<br><br>
 		<button id="btnVibrateMyo">Vibrate the connected Myo</button>
 		<br><br>
-		<button id="btnShowMyo">See info of the current connected Myo</button>
+		<button id="btnShowMyo">Show current connected Myo</button>
 		<br><br>
-		<button id="btnListDevices">See connected Myos</button>
+		<button id="btnListDevices">Show list of connected Myos</button>
 		<br><br>
 		<button id="btnDetach">Detach from current Myo</button>
 		<br><br>
 		<button id="btnShutdown">Shutdown Myo API</button>
+		<br><br>
+		<button id="btnSensorMode">Toggle sensor data</button>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>

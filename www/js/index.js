@@ -26,7 +26,7 @@
  * Myo Cordova plugin test application
  */
 
-var myoTests = function(){
+var initMyoDemoApp = function(){
 	if(cordova && cordova.plugins && cordova.plugins.MyoApi){
 		console.log("Myo plugin found!!");
 	}else{
@@ -38,23 +38,28 @@ var myoTests = function(){
 	function docElem(id){
 		return document.getElementById(id);
 	}
-	function setVisible(elem, isVisible){
-		elem.setAttribute("style", (isVisible ? "display:block;" : "display:none;"));
+	function setVisible(elemId, isVisible){
+		docElem(elemId).setAttribute("style", (isVisible ? "display:block;" : "display:none;"));
 	}
-	function showUiState(state){
-		var myoConnecting = docElem("myoConnecting");
-		var myoConnected = docElem("myoConnected");
-		if(state === "connecting"){
-			setVisible(myoConnecting, true);
-			setVisible(myoConnected, false);
-		}else if(state === "connected"){
-			setVisible(myoConnecting, false);
-			setVisible(myoConnected, true);
-		}else if(state === "initial"){
-			setVisible(myoConnected, false);
-			setVisible(myoConnecting, false);
+	var uiElementsIds = ["myoConnecting", "myoConnected", "myoSensorData"];
+	var visibilityMap = {
+		"connecting":		[true, false, false],
+		"connected":		[false, true, false],
+		"initial":			[false, false, false],
+		"sensor data":		[false, false, true]
+	};
+	var prevUiState = null;
+	var currentUiState = null;
+	function showUiState(stateId){
+		var visibilityConf = visibilityMap[stateId];
+		if(visibilityConf){
+			for(var i = 0; i < uiElementsIds.length; ++i){
+				setVisible(uiElementsIds[i], visibilityConf[i]);
+			}
+			prevUiState = currentUiState;
+			currentUiState = stateId;
 		}else{
-			console.log("ERROR: unkown UI state: " + state);
+			console.log("ERROR: unkown UI state: " + stateId);
 		}
 	};
 
@@ -85,7 +90,9 @@ var myoTests = function(){
 	}
 	function alertMyoPose(ev){
 		logMyoEvent(ev);
-		window.alert("Pose detected: " + ev.pose);
+		if(ev.pose !== MyoApi.Pose.REST){
+			window.alert("Pose detected: " + ev.pose);
+		}
 	}
 
 	initApi();
@@ -141,9 +148,6 @@ var myoTests = function(){
 	.on("pose", alertMyoPose, function(err){
 		console.log("ERROR: onPose: " + err);
 	})
-	//.on("orientationData", logMyoEvent)
-	//.on("accelerometerData", logMyoEvent)
-	//.on("gyroscopeData", logMyoEvent)
 	.on("rssi", logMyoEvent);
 
 	docElem("btnAttachLast").onclick = function(){
@@ -231,6 +235,56 @@ var myoTests = function(){
 		showUiState("initial");
 	};
 
+	function createSensorDataHandler(txtElemId, eventDataField, isQuaternion){
+		var NUM_PREC = 3;
+		var txtElement = docElem(txtElemId);
+		var prevTimestamp = null;
+		return function(ev){
+			var d = ev[eventDataField];
+			var txt = "X: " + d.x.toFixed(NUM_PREC)
+				+ " Y: " + d.y.toFixed(NUM_PREC)
+				+ " Z: " + d.z.toFixed(NUM_PREC);
+			if(isQuaternion){
+				txt += " W: " + d.w.toFixed(NUM_PREC)
+					+ "<br>&nbsp;&nbsp;\\\\\\ Roll: " + d.roll.toFixed(NUM_PREC)
+					+ " Pitch: " + d.pitch.toFixed(NUM_PREC)
+					+ " Yaw: " + d.yaw.toFixed(NUM_PREC);
+			}
+			//Uncomment to see timing info
+			/*if(prevTimestamp){
+				txt += " deltaMs: " + (ev.timestamp -  prevTimestamp).toFixed(NUM_PREC);
+			}*/
+			txtElement.innerHTML = txt;
+			prevTimestamp = ev.timestamp;
+		};
+	}
+
+	var isSensorMode = false;
+	docElem("btnSensorMode").onclick = function(){
+		console.log("Clicked on sensor mode button. Is sensor mode? " + isSensorMode);
+		if(!isSensorMode){
+			if(myMyo){
+				MyoApi
+				.on("orientationData", createSensorDataHandler("sensOrientationData", "rotation", true))
+				.on("accelerometerData", createSensorDataHandler("sensAccelerometerData", "accel"))
+				.on("gyroscopeData", createSensorDataHandler("sensGyroscopeData", "gyro"));
+				showUiState("sensor data");
+				isSensorMode = true;
+			}else{
+				window.alert("No Myo currently attached");
+			}
+		}else{
+			MyoApi
+			.off("orientationData")
+			.off("accelerometerData")
+			.off("gyroscopeData");
+			showUiState(prevUiState ? prevUiState : "initial");
+			isSensorMode = false;
+		}
+	};
+
+	showUiState("initial");
+
 };
 
 document.addEventListener('deviceready', function(){
@@ -239,6 +293,5 @@ document.addEventListener('deviceready', function(){
 	var receivedElement = parentElement.querySelector('.received');
 	listeningElement.setAttribute('style', 'display:none;');
 	receivedElement.setAttribute('style', 'display:block;');
-	myoTests();
+	initMyoDemoApp();
 }, false);
-
