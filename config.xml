@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.tribalyte.app.myoplugintest" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyoPluginTestCordova</name>
+<widget id="com.tribalyte.app.myoplugindemo" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Myo Cordova Demo</name>
     <description>
         A sample application to demonstrate the usage of the cordova-plugin-myo
     </description>
@@ -9,4 +9,10 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+	
+	<preference name="android-installLocation" value="auto" />
+	<preference name="android-minSdkVersion" value="18" />
+	
+	<icon src="icon-96x96.png" />
+	
 </widget>
