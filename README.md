@@ -1,11 +1,11 @@
 # cordova-plugin-myo-demo
 Sample application to demonstrate the usage of the <a href="https://github.com/TribalyteTechnologies/cordova-plugin-myo">cordova-plugin-myo project</a>.
 
-## Sample app for Android
+<!--## Sample app for Android
 <a href="https://play.google.com/store/apps/details?id=com.tribalyte.app.myoplugindemo">
   <img alt="Android app on Google Play"
        src="https://developer.android.com/images/brand/en_app_rgb_wo_60.png" />
-</a>
+</a>-->
 
 ## Installation
 0. (Prerequisite) If you haven't already, download and install the [Android SDK Build Tools](https://developer.android.com/tools/revisions/build-tools.html) and the [Cordova CLI](http://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface_installing_the_cordova_cli)
